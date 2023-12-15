@@ -1,33 +1,51 @@
-#include<iostream>
-#include<iomanip> //For using setw(), setprecision(), ...
-using namespace std;
+	#include<iostream>
+	#include<iomanip> 
+	using namespace std;
 
-int main(){	
-	cout << "Enter initial loan: ";
-	cout << "Enter interest rate per year (%): ";
-	cout << "Enter amount you can pay per year: ";
+	int main(){
 
-	//use 'setw' to set width of table and 'left' to set left-alignment
-	//you can change input argument of 'setw()' to see the effect
-	//Try to change from 'left' to 'right' and see the effect
-	cout << setw(13) << left << "EndOfYear#"; 
-	cout << setw(13) << left << "PrevBalance"; 
-	cout << setw(13) << left << "Interest"; 
-	cout << setw(13) << left << "Total";
-	cout << setw(13) << left << "Payment";
-	cout << setw(13) << left << "NewBalance";
-	cout << "\n";
+		double loan,rate,pay;
+		double NB = 1;
+		double Z = 0;
+		
+		cout << "Enter initial loan: "; cin >>  loan;
+		cout << "Enter interest rate per year (%): "; cin >>  rate;
+		cout << "Enter amount you can pay per year: "; cin >>  pay;
+
+		
+		cout << setw(13) << left << "EndOfYear#"; 
+		cout << setw(13) << left << "PrevBalance"; 
+		cout << setw(13) << left << "Interest"; 
+		cout << setw(13) << left << "Total";
+		cout << setw(13) << left << "Payment";
+		cout << setw(13) << left << "NewBalance";
+		cout << "\n";
+		for(int year=1; NB >=0 ; year++){
+			cout << fixed << setprecision(2); 
+			cout << setw(13) << left << year; 
+			cout << setw(13) << left << loan;
+			double In=loan*(rate/100);
+				cout << setw(13) << left << In;
+			double Total=loan+(loan*(rate/100));
+				cout << setw(13) << left << Total;
+			if (pay < Total){
+				cout << setw(13) << left << pay;
+			}
+			else{
+				cout << setw(13) << left << Total ;
+			}
+			NB = Total-pay;
+			
+			if (pay < Total){
+				cout << setw(13) << left << NB;
+			}
+			else{
+				cout << setw(13) << left << Z;
+			}
+			loan = NB;
+			cout << "\n";	
+		}
+		return 0;
+	}
+
 	
-	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
-	//you can change input argument of 'setprecision()' to see the effect
-	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
-	
-	return 0;
-}
